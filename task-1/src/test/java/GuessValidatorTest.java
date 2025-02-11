@@ -1,25 +1,63 @@
-import junit.framework.Assert;
-import junit.framework.TestCase;
+import org.junit.Test;
+import org.junit.Assert;
+import org.junit.Before;
 
-public class GuessValidatorTest extends TestCase {
+public class GuessValidatorTest {
 
-    public void testValidateGuess() {
-        String a = "1234";
-        GuessValidator gv = new GuessValidator();
-        gv.validateGuess(a, "1234");
-        Assert.assertEquals(4, gv.getBulls());
-        Assert.assertEquals(0, gv.getCows());
-        gv.validateGuess(a, "5234");
-        Assert.assertEquals(3, gv.getBulls());
-        Assert.assertEquals(0, gv.getCows());
-        gv.validateGuess(a, "2134");
-        Assert.assertEquals(2, gv.getBulls());
-        Assert.assertEquals(2, gv.getCows());
-        gv.validateGuess(a, "2314");
-        Assert.assertEquals(1, gv.getBulls());
-        Assert.assertEquals(3, gv.getCows());
-        gv.validateGuess(a, "4321");
-        Assert.assertEquals(0, gv.getBulls());
-        Assert.assertEquals(4, gv.getCows());
+    private GuessValidator guessValidator;
+
+    @Before
+    public void setUp() {
+        guessValidator = new GuessValidator();
+    }
+
+    @Test
+    public void testExactMatch() {
+        guessValidator.validateGuess("1234", "1234");
+        Assert.assertEquals(4, guessValidator.getBulls());
+        Assert.assertEquals(0, guessValidator.getCows());
+    }
+
+    @Test
+    public void testAllCowsNoBulls() {
+        guessValidator.validateGuess("1234", "4321");
+        Assert.assertEquals(0, guessValidator.getBulls());
+        Assert.assertEquals(4, guessValidator.getCows());
+    }
+
+    @Test
+    public void testSomeBullsSomeCows() {
+        guessValidator.validateGuess("1234", "1243");
+        Assert.assertEquals(2, guessValidator.getBulls());
+        Assert.assertEquals(2, guessValidator.getCows());
+    }
+
+    @Test
+    public void testSomeBullsNoCows() {
+        guessValidator.validateGuess("1234", "1267");
+        Assert.assertEquals(2, guessValidator.getBulls());
+        Assert.assertEquals(0, guessValidator.getCows());
+    }
+
+    @Test
+    public void testNoBullsNoCows() {
+        guessValidator.validateGuess("1234", "5678");
+        Assert.assertEquals(0, guessValidator.getBulls());
+        Assert.assertEquals(0, guessValidator.getCows());
+    }
+
+    @Test
+    public void testEmptyInputs() {
+        guessValidator.validateGuess("", "");
+        Assert.assertEquals(0, guessValidator.getBulls());
+        Assert.assertEquals(0, guessValidator.getCows());
+    }
+
+    @Test
+    public void testResetFunctionality() {
+        guessValidator.validateGuess("1234", "1234");
+        guessValidator.resetCount();
+        Assert.assertEquals(0, guessValidator.getBulls());
+        Assert.assertEquals(0, guessValidator.getCows());
     }
 }
