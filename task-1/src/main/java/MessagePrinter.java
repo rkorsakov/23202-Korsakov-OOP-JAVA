@@ -24,6 +24,10 @@ public class MessagePrinter {
         );
     }
 
+    public void printStepMessage(int len){
+        System.out.println("Введите " + len + " уникальные цифры: ");
+    }
+
     public void printAnswer(String secretNumber) {
         System.out.println("Правильный ответ: " + secretNumber);
     }

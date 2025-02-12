@@ -14,7 +14,7 @@ public class InputHandler {
 
     public String getInput() {
         while (true) {
-            System.out.print("Введите 4 уникальные цифры: ");
+            messagePrinter.printStepMessage(LENGTH);
             String input = scanner.nextLine().trim();
             if (isInputValid(input)) {
                 return input;
