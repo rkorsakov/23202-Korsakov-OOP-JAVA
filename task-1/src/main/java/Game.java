@@ -13,7 +13,7 @@ public class Game {
         this.player = player;
         this.messagePrinter = new MessagePrinter();
         this.gameActive = false;
-        this.attempt = 1;
+        this.attempt = 0;
         generateSecretNum();
     }
 
@@ -23,6 +23,7 @@ public class Game {
         final GuessValidator guessValidator = new GuessValidator();
         while (gameActive) {
             String playerGuess = player.makeGuess();
+            attempt++;
             guessValidator.validateGuess(secretNumber, playerGuess);
             if (guessValidator.getBulls() == 4) {
                 messagePrinter.printWinMessage();
@@ -34,8 +35,19 @@ public class Game {
                 messagePrinter.printAnswer(secretNumber);
                 gameActive = false;
             }
-            attempt++;
         }
+    }
+
+    public String getSecretNumber() {
+        return secretNumber;
+    }
+
+    public boolean isGameActive() {
+        return gameActive;
+    }
+
+    public int getAttempt() {
+        return attempt;
     }
 
     private void generateSecretNum() {
