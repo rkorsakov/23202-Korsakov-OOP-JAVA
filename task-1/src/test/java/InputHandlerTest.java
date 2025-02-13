@@ -1,7 +1,8 @@
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+
+import static org.junit.Assert.*;
 
 public class InputHandlerTest {
 
@@ -11,7 +12,7 @@ public class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputHandler inputHandler = new InputHandler();
         String result = inputHandler.getInput();
-        Assert.assertEquals("1234", result);
+        assertEquals("1234", result);
     }
 
     @Test
@@ -20,7 +21,7 @@ public class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputHandler inputHandler = new InputHandler();
         String result = inputHandler.getInput();
-        Assert.assertEquals("1234", result);
+        assertEquals("1234", result);
     }
 
     @Test
@@ -29,7 +30,7 @@ public class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputHandler inputHandler = new InputHandler();
         String result = inputHandler.getInput();
-        Assert.assertEquals("1234", result);
+        assertEquals("1234", result);
     }
 
     @Test
@@ -38,7 +39,7 @@ public class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputHandler inputHandler = new InputHandler();
         String result = inputHandler.getInput();
-        Assert.assertEquals("1234", result);
+        assertEquals("1234", result);
     }
 
     @Test
@@ -47,7 +48,7 @@ public class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputHandler inputHandler = new InputHandler();
         String result = inputHandler.getInput();
-        Assert.assertEquals("1234", result);
+        assertEquals("1234", result);
     }
 
     @Test
@@ -56,7 +57,7 @@ public class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputHandler inputHandler = new InputHandler();
         String result = inputHandler.getInput();
-        Assert.assertEquals("1234", result);
+        assertEquals("1234", result);
     }
 
     @Test
@@ -65,7 +66,7 @@ public class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputHandler inputHandler = new InputHandler();
         String result = inputHandler.getInput();
-        Assert.assertEquals("0123", result);
+        assertEquals("0123", result);
     }
 
     @Test
@@ -74,7 +75,7 @@ public class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputHandler inputHandler = new InputHandler();
         String result = inputHandler.getInput();
-        Assert.assertEquals("1234", result);
+        assertEquals("1234", result);
     }
 
     @Test
@@ -83,7 +84,7 @@ public class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputHandler inputHandler = new InputHandler();
         String result = inputHandler.getInput();
-        Assert.assertEquals("1234", result);
+        assertEquals("1234", result);
     }
 
     @Test
@@ -92,7 +93,7 @@ public class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputHandler inputHandler = new InputHandler();
         String result = inputHandler.getInput();
-        Assert.assertEquals("1234", result);
+        assertEquals("1234", result);
     }
 
     @Test
@@ -101,6 +102,6 @@ public class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputHandler inputHandler = new InputHandler();
         String result = inputHandler.getInput();
-        Assert.assertEquals("1234", result);
+        assertEquals("1234", result);
     }
 }
