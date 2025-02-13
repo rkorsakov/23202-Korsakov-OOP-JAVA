@@ -3,11 +3,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class Game {
+    private final MessagePrinter messagePrinter;
+    private final Player player;
     private int attempt;
     private String secretNumber;
     private boolean gameActive;
-    private final MessagePrinter messagePrinter;
-    private final Player player;
 
     public Game(Player player) {
         this.player = player;

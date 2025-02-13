@@ -1,11 +1,11 @@
-import java.util.Scanner;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class InputHandler {
+    private static final int LENGTH = 4;
     private final Scanner scanner;
     private final MessagePrinter messagePrinter;
-    private static final int LENGTH = 4;
 
     public InputHandler() {
         this.scanner = new Scanner(System.in);

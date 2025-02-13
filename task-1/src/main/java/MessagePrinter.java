@@ -24,7 +24,7 @@ public class MessagePrinter {
         );
     }
 
-    public void printStepMessage(int len){
+    public void printStepMessage(int len) {
         System.out.println("Введите " + len + " уникальные цифры: ");
     }
 
