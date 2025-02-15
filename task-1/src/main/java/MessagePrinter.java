@@ -1,8 +1,8 @@
 public class MessagePrinter {
 
     public void printGuessState(int bulls, int cows) {
-        System.out.println("БЫКИ:\uD83D\uDC02 " + bulls);
-        System.out.println("КОРОВЫ:\uD83D\uDC04 " + cows);
+        System.out.println("БЫКИ: " + bulls);
+        System.out.println("КОРОВЫ: " + cows);
     }
 
     public void printWinMessage() {
