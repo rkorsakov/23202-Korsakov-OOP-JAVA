@@ -21,15 +21,17 @@ public class Game {
         gameActive = true;
         messagePrinter.printHelloMessage();
         final GuessValidator guessValidator = new GuessValidator();
+
         while (gameActive) {
             String playerGuess = player.makeGuess();
             attempt++;
-            guessValidator.validateGuess(secretNumber, playerGuess);
-            if (guessValidator.getBulls() == 4) {
+            GuessResult result = guessValidator.validateGuess(secretNumber, playerGuess);
+
+            if (result.getBulls() == 4) {
                 messagePrinter.printWinMessage();
                 gameActive = false;
             } else if (attempt < 10) {
-                messagePrinter.printGuessState(guessValidator.getBulls(), guessValidator.getCows());
+                messagePrinter.printGuessState(result.getBulls(), result.getCows());
             } else {
                 messagePrinter.printLoseMessage();
                 messagePrinter.printAnswer(secretNumber);
@@ -37,6 +39,7 @@ public class Game {
             }
         }
     }
+
 
     public String getSecretNumber() {
         return secretNumber;

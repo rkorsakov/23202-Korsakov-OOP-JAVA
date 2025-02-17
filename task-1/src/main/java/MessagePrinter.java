@@ -1,38 +1,38 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MessagePrinter {
+    private static final Logger logger = LoggerFactory.getLogger(MessagePrinter.class);
 
     public void printGuessState(int bulls, int cows) {
-        System.out.println("БЫКИ: " + bulls);
-        System.out.println("КОРОВЫ: " + cows);
+        logger.info("БЫКИ: {} | КОРОВЫ: {}", bulls, cows);
     }
 
     public void printWinMessage() {
-        System.out.println("Вы победили!");
+        logger.info("Вы победили!");
     }
 
     public void printLoseMessage() {
-        System.out.println("Вы проиграли!");
+        logger.info("Вы проиграли!");
     }
 
     public void printHelloMessage() {
-        System.out.println("""
+        logger.info("""
                 Компьютер задумывает четыре различные цифры из 0,1,2,...9. Вы делаете ходы, чтобы узнать эти цифры и их порядок.
-                
                 Каждый ход состоит из четырёх цифр, 0 может стоять на первом месте.
-                
                 В ответ компьютер показывает число отгаданных цифр, стоящих на своих местах (число быков) и число отгаданных цифр, стоящих не на своих местах (число коров).
-                """
-        );
+                """);
     }
 
     public void printStepMessage(int len) {
-        System.out.println("Введите " + len + " уникальные цифры: ");
+        logger.info("Введите {} уникальные цифры: ", len);
     }
 
     public void printAnswer(String secretNumber) {
-        System.out.println("Правильный ответ: " + secretNumber);
+        logger.info("Правильный ответ: {}", secretNumber);
     }
 
     public void printError(String errorMessage) {
-        System.err.println("Ошибка: " + errorMessage);
+        logger.error("Ошибка: {}", errorMessage);
     }
 }
