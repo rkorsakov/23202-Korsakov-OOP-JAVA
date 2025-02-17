@@ -33,6 +33,6 @@ public class MessagePrinter {
     }
 
     public void printError(String errorMessage) {
-        System.out.println("Ошибка: " + errorMessage);
+        System.err.println("Ошибка: " + errorMessage);
     }
 }
