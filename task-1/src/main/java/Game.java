@@ -27,11 +27,11 @@ public class Game {
             attempt++;
             GuessResult result = guessValidator.validateGuess(secretNumber, playerGuess);
 
-            if (result.getBulls() == 4) {
+            if (result.bulls() == 4) {
                 messagePrinter.printWinMessage();
                 gameActive = false;
             } else if (attempt < 10) {
-                messagePrinter.printGuessState(result.getBulls(), result.getCows());
+                messagePrinter.printGuessState(result.bulls(), result.cows());
             } else {
                 messagePrinter.printLoseMessage();
                 messagePrinter.printAnswer(secretNumber);
