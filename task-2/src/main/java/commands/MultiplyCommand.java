@@ -9,7 +9,7 @@ public class MultiplyCommand implements Command {
     @Override
     public void execute(ExecutionContext executionContext, String[] args) throws CommandException {
         if (executionContext.getStack().size() < 2) {
-            throw new CommandException("Not enough values in stack for multiplication");
+            throw new CommandException("MULTIPLY command: not enough values in stack");
         }
         double b = executionContext.getStack().pop();
         double a = executionContext.getStack().pop();

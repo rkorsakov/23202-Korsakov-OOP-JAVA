@@ -8,7 +8,7 @@ public class SubtractCommand implements Command {
     @Override
     public void execute(ExecutionContext executionContext, String[] args) throws CommandException {
         if (executionContext.getStack().size() < 2) {
-            throw new CommandException("Not enough values in stack for subtraction");
+            throw new CommandException("SUBTRACT command: not enough values in stack");
         }
         double b = executionContext.getStack().pop();
         double a = executionContext.getStack().pop();
