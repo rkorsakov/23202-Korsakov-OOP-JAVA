@@ -32,7 +32,6 @@ public class StackCalculator {
                 command.execute(context, args);
             } catch (CommandException e) {
                 System.err.println(e.getMessage());
-                e.getCause().printStackTrace();
             }
         }
     }
