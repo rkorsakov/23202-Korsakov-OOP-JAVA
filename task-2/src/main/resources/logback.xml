@@ -3,11 +3,11 @@
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>logs/app.log</file>
         <encoder>
-            <pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%level] [%logger{10}] - %msg%n</pattern>
+            <pattern>[%d{HH:mm:ss}] [%level] [%logger] - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <root level="info">
+    <root level="DEBUG">
         <appender-ref ref="FILE"/>
     </root>
 
