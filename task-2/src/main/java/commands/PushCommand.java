@@ -8,10 +8,9 @@ public class PushCommand implements Command {
 
     @Override
     public void execute(ExecutionContext executionContext, String[] args) throws CommandException {
-        if (args.length == 0) {
-            throw new CommandException("PUSH command requires an argument");
+        if (args.length != 1) {
+            throw new CommandException("PUSH command: one argument required");
         }
-        try {
             double value;
             if (executionContext.getParameters().containsKey(args[0]))
                 value = executionContext.getParameters().get(args[0]);
@@ -22,8 +21,5 @@ public class PushCommand implements Command {
                     throw new CommandException("Unknown parameter: " + args[0]);
                 }
             executionContext.getStack().push(value);
-        } catch (NumberFormatException e) {
-            throw new CommandException("invalid format for PUSH command argument");
-        }
     }
 }

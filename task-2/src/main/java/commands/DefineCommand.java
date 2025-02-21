@@ -8,8 +8,8 @@ public class DefineCommand implements Command {
 
     @Override
     public void execute(ExecutionContext executionContext, String[] args) throws CommandException {
-        if (args.length < 2)
-            throw new CommandException("DEFINE command requires two arguments");
+        if (args.length != 2)
+            throw new CommandException("DEFINE command: two arguments required");
         String name = args[0];
         try {
             Double.parseDouble(name);
