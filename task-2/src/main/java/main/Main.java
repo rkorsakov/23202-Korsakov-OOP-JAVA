@@ -7,7 +7,7 @@ public class Main {
             String fileName = args.length > 0 ? args[0] : null;
             stackCalculator.run(fileName);
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 }
