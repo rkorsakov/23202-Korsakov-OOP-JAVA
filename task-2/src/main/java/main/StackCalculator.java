@@ -48,6 +48,7 @@ public class StackCalculator {
                 System.err.println(e.getMessage());
             }
         }
+        inputHandler.close();
         logger.info("Execution finished");
     }
 }
