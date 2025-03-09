@@ -9,9 +9,9 @@ import static org.junit.Assert.assertThrows;
 
 public class PushCommandTest {
 
+    private static final double DELTA = 1e-15;
     private ExecutionContext context;
     private PushCommand pushCommand;
-    private static final double DELTA = 1e-15;
 
     @Before
     public void setUp() {

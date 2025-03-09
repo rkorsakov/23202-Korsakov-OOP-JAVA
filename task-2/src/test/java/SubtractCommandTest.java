@@ -8,9 +8,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 public class SubtractCommandTest {
+    private static final double DELTA = 1e-15;
     private ExecutionContext context;
     private SubtractCommand subtractCommand;
-    private static final double DELTA = 1e-15;
 
     @Before
     public void setUp() {
