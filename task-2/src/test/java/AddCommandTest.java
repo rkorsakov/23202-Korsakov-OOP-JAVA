@@ -3,18 +3,21 @@ import main.CommandException;
 import main.ExecutionContext;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 public class AddCommandTest {
     private static final double DELTA = 1e-15;
-    private ExecutionContext context;
     private AddCommand addCommand;
+    @Mock
+    private ExecutionContext context;
 
     @Before
     public void setUp() {
-        context = new ExecutionContext();
+        context = Mockito.mock(ExecutionContext.class);
         addCommand = new AddCommand();
     }
 
