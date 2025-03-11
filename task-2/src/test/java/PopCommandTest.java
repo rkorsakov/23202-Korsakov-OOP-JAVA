@@ -4,7 +4,8 @@ import main.ExecutionContext;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class PopCommandTest {
 
@@ -19,15 +20,15 @@ public class PopCommandTest {
 
     @Test
     public void testPopFromStack() throws CommandException {
-        context.getStack().push(5.0);
+        context.pushStack(5.0);
         popCommand.execute(context, new String[]{});
-        assertTrue(context.getStack().isEmpty());
+        assertEquals(0, context.getStackSize());
     }
 
     @Test
     public void testPopFromEmptyStackThrowsException() {
         CommandException exception = assertThrows(CommandException.class,
                 () -> popCommand.execute(context, new String[]{}));
-        assertEquals("POP command failed: stack is empty", exception.getMessage());
+        assertEquals("POP command: stack is empty", exception.getMessage());
     }
 }

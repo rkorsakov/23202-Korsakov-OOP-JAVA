@@ -20,10 +20,10 @@ public class SubtractCommandTest {
 
     @Test
     public void testSubtractTwoNumbers() throws CommandException {
-        context.getStack().push(5.0);
-        context.getStack().push(3.0);
+        context.pushStack(5.0);
+        context.pushStack(3.0);
         subtractCommand.execute(context, new String[]{});
-        assertEquals(2.0, context.getStack().peek(), DELTA);
+        assertEquals(2.0, context.peekStack(), DELTA);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class SubtractCommandTest {
 
     @Test
     public void testSubtractThrowsExceptionIfOnlyOneNumber() {
-        context.getStack().push(2.0);
+        context.pushStack(2.0);
         CommandException exception = assertThrows(CommandException.class, () -> subtractCommand.execute(context, new String[]{}));
         assertEquals("SUBTRACT command: not enough values in stack", exception.getMessage());
     }

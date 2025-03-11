@@ -24,7 +24,7 @@ public class PushCommand extends ContextCommand {
         if (context.hasParameter(args[0])) {
             value = context.getParameter(args[0]);
         } else {
-            value = parseDouble(args[0], "PUSH command: invalid number or unknown parameter: " + args[0]);
+            value = parseDouble(args[0], "Invalid number or unknown parameter: " + args[0]);
         }
         context.pushStack(value);
         logger.debug("PUSH command executed successfully: pushed {}", value);

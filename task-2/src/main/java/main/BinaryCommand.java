@@ -12,7 +12,7 @@ public abstract class BinaryCommand implements Command {
     @Override
     public void execute(ExecutionContext context, String[] args) throws CommandException {
         if (context.getStackSize() < 2) {
-            throw new CommandException(getCommandName() + " failed: not enough values in stack");
+            throw new CommandException(getCommandName() + " command: not enough values in stack");
         }
         double b = context.popStack();
         double a = context.popStack();

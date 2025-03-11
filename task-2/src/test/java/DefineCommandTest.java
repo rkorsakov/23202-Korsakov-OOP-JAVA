@@ -22,7 +22,7 @@ public class DefineCommandTest {
     @Test
     public void testDefineValidParameter() throws CommandException {
         defineCommand.execute(context, new String[]{"x", "10"});
-        assertEquals(10.0, context.getParameters().get("x"), DELTA);
+        assertEquals(10.0, context.getParameter("x"), DELTA);
     }
 
     @Test

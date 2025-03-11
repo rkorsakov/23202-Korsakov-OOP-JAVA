@@ -13,15 +13,21 @@ public class DefineCommand extends ContextCommand {
     @Override
     protected void validateArgs(String[] args) throws CommandException {
         if (args.length != 2) {
-            logger.warn("DEFINE command failed: exactly two arguments required");
-            throw new CommandException("DEFINE command: exactly two arguments required");
+            logger.warn("DEFINE command failed: two arguments required");
+            throw new CommandException("DEFINE command: two arguments required");
+        }
+        try {
+            Double.parseDouble(args[0]);
+            logger.error("DEFINE command failed: parameter should be a string");
+            throw new CommandException("DEFINE command: parameter should be a string");
+        } catch (NumberFormatException _) {
         }
     }
 
     @Override
     protected void executeCommand(ExecutionContext context, String[] args) throws CommandException {
         String name = args[0];
-        double value = parseDouble(args[1], "DEFINE command: invalid number format for value: " + args[1]);
+        double value = parseDouble(args[1], "Invalid format for parameter: " + args[0]);
         context.setParameter(name, value);
         logger.info("DEFINE command executed: defined {} = {}", name, value);
     }
@@ -33,6 +39,7 @@ public class DefineCommand extends ContextCommand {
 
     private double parseDouble(String value, String errorMessage) throws CommandException {
         try {
+
             return Double.parseDouble(value);
         } catch (NumberFormatException e) {
             logger.error(errorMessage);

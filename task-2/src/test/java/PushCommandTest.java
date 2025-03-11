@@ -22,15 +22,15 @@ public class PushCommandTest {
     @Test
     public void testPushNumberOntoStack() throws CommandException {
         pushCommand.execute(context, new String[]{"5.5"});
-        assertEquals(1, context.getStack().size());
-        assertEquals(5.5, context.getStack().peek(), DELTA);
+        assertEquals(1, context.getStackSize());
+        assertEquals(5.5, context.peekStack(), DELTA);
     }
 
     @Test
     public void testPushUnknownParameterThrowsException() {
         CommandException exception = assertThrows(CommandException.class,
                 () -> pushCommand.execute(context, new String[]{"unknown"}));
-        assertEquals("Unknown parameter: unknown", exception.getMessage());
+        assertEquals("Invalid number or unknown parameter: unknown", exception.getMessage());
     }
 
     @Test

@@ -17,7 +17,7 @@ public abstract class ContextCommand implements Command {
 
     protected void checkStackNotEmpty(ExecutionContext context) throws CommandException {
         if (context.isStackEmpty()) {
-            throw new CommandException(getCommandName() + " failed: stack is empty");
+            throw new CommandException(getCommandName() + " command: stack is empty");
         }
     }
 

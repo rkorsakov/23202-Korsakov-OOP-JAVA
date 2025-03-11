@@ -23,10 +23,10 @@ public class AddCommandTest {
 
     @Test
     public void testAddTwoNumbers() throws CommandException {
-        context.getStack().push(2.0);
-        context.getStack().push(3.0);
+        context.pushStack(2.0);
+        context.pushStack(3.0);
         addCommand.execute(context, new String[]{});
-        assertEquals(5.0, context.getStack().peek(), DELTA);
+        assertEquals(5.0, context.peekStack(), DELTA);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class AddCommandTest {
 
     @Test
     public void testAddThrowsExceptionIfOnlyOneNumber() {
-        context.getStack().push(2.0);
+        context.pushStack(2.0);
         CommandException exception = assertThrows(CommandException.class, () -> addCommand.execute(context, new String[]{}));
         assertEquals("ADD command: not enough values in stack", exception.getMessage());
     }

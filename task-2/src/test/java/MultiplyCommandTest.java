@@ -20,10 +20,10 @@ public class MultiplyCommandTest {
 
     @Test
     public void testMultiplyTwoNumbers() throws CommandException {
-        context.getStack().push(2.0);
-        context.getStack().push(3.0);
+        context.pushStack(2.0);
+        context.pushStack(3.0);
         multiplyCommand.execute(context, new String[]{});
-        assertEquals(6.0, context.getStack().peek(), DELTA);
+        assertEquals(6.0, context.peekStack(), DELTA);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class MultiplyCommandTest {
 
     @Test
     public void testMultiplyThrowsExceptionIfOnlyOneNumber() {
-        context.getStack().push(2.0);
+        context.pushStack(2.0);
         CommandException exception = assertThrows(CommandException.class, () -> multiplyCommand.execute(context, new String[]{}));
         assertEquals("MULTIPLY command: not enough values in stack", exception.getMessage());
     }

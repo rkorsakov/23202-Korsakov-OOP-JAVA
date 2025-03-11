@@ -13,7 +13,7 @@ public abstract class UnaryCommand implements Command {
     public void execute(ExecutionContext context, String[] args) throws CommandException {
         validateArgs(args);
         if (context.isStackEmpty()) {
-            throw new CommandException(getCommandName() + " failed: stack is empty");
+            throw new CommandException(getCommandName() + " command: stack is empty");
         }
         double value = context.popStack();
         double result = performOperation(value);

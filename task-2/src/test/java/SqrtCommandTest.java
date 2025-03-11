@@ -20,14 +20,14 @@ public class SqrtCommandTest {
 
     @Test
     public void testSqrtOfPositiveNumber() throws CommandException {
-        context.getStack().push(9.0);
+        context.pushStack(9.0);
         sqrtCommand.execute(context, new String[]{});
-        assertEquals(3.0, context.getStack().peek(), DELTA);
+        assertEquals(3.0, context.peekStack(), DELTA);
     }
 
     @Test
     public void testSqrtThrowsExceptionForNegativeNumber() {
-        context.getStack().push(-9.0);
+        context.pushStack(-9.0);
         CommandException exception = assertThrows(CommandException.class, () -> sqrtCommand.execute(context, new String[]{}));
         assertEquals("SQRT command: negative number", exception.getMessage());
     }

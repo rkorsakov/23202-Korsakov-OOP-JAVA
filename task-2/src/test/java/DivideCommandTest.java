@@ -20,18 +20,18 @@ public class DivideCommandTest {
 
     @Test
     public void testDivideTwoNumbers() throws CommandException {
-        context.getStack().push(6.0);
-        context.getStack().push(3.0);
+        context.pushStack(6.0);
+        context.pushStack(3.0);
         divideCommand.execute(context, new String[]{});
-        assertEquals(2.0, context.getStack().peek(), DELTA);
+        assertEquals(2.0, context.peekStack(), DELTA);
     }
 
     @Test
     public void testDivideByZeroThrowsException() {
-        context.getStack().push(6.0);
-        context.getStack().push(0.0);
+        context.pushStack(6.0);
+        context.pushStack(0.0);
         CommandException exception = assertThrows(CommandException.class, () -> divideCommand.execute(context, new String[]{}));
-        assertEquals("DIVIDE command: division by zero", exception.getMessage());
+        assertEquals("Division by zero", exception.getMessage());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class DivideCommandTest {
 
     @Test
     public void testDivideThrowsExceptionIfOnlyOneNumber() {
-        context.getStack().push(2.0);
+        context.pushStack(2.0);
         CommandException exception = assertThrows(CommandException.class, () -> divideCommand.execute(context, new String[]{}));
         assertEquals("DIVIDE command: not enough values in stack", exception.getMessage());
     }
