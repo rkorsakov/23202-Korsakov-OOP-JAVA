@@ -1,25 +1,25 @@
 package commands;
 
-import main.Command;
-import main.CommandException;
-import main.ExecutionContext;
-import org.slf4j.Logger;
+import main.BinaryCommand;
 import org.slf4j.LoggerFactory;
 
-public class MultiplyCommand implements Command {
-    private static final Logger logger = LoggerFactory.getLogger(MultiplyCommand.class);
+public class MultiplyCommand extends BinaryCommand {
+    public MultiplyCommand() {
+        super(LoggerFactory.getLogger(MultiplyCommand.class));
+    }
 
     @Override
-    public void execute(ExecutionContext executionContext, String[] args) throws CommandException {
-        if (executionContext.getStack().size() < 2) {
-            logger.error("MULTIPLY command failed: not enough values in stack");
-            throw new CommandException("MULTIPLY command: not enough values in stack");
-        }
-        double b = executionContext.getStack().pop();
-        double a = executionContext.getStack().pop();
-        double result = a * b;
-        executionContext.getStack().push(result);
+    protected double performOperation(double a, double b) {
+        return a * b;
+    }
 
+    @Override
+    protected String getCommandName() {
+        return "MULTIPLY";
+    }
+
+    @Override
+    protected void logExecution(double a, double b, double result) {
         logger.info("Executed MULTIPLY command: {} * {} = {}", a, b, result);
     }
 }

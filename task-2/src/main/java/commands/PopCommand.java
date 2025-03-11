@@ -1,21 +1,32 @@
 package commands;
 
-import main.Command;
 import main.CommandException;
+import main.ContextCommand;
 import main.ExecutionContext;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PopCommand implements Command {
-    private static final Logger logger = LoggerFactory.getLogger(PopCommand.class);
+public class PopCommand extends ContextCommand {
+    public PopCommand() {
+        super(LoggerFactory.getLogger(PopCommand.class));
+    }
 
     @Override
-    public void execute(ExecutionContext executionContext, String[] args) throws CommandException {
-        if (executionContext.getStack().isEmpty()) {
-            logger.warn("POP command failed: stack is empty");
-            throw new CommandException("POP command failed: stack is empty");
+    protected void validateArgs(String[] args) throws CommandException {
+        if (args.length > 0) {
+            logger.warn("POP command failed: no arguments expected");
+            throw new CommandException("POP command: no arguments expected");
         }
-        executionContext.getStack().pop();
+    }
+
+    @Override
+    protected void executeCommand(ExecutionContext context, String[] args) throws CommandException {
+        checkStackNotEmpty(context);
+        context.popStack();
         logger.info("POP command executed: top value removed from stack");
+    }
+
+    @Override
+    protected String getCommandName() {
+        return "POP";
     }
 }

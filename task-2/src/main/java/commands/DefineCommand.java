@@ -1,34 +1,42 @@
 package commands;
 
-import main.Command;
 import main.CommandException;
+import main.ContextCommand;
 import main.ExecutionContext;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DefineCommand implements Command {
-    private static final Logger logger = LoggerFactory.getLogger(DefineCommand.class);
+public class DefineCommand extends ContextCommand {
+    public DefineCommand() {
+        super(LoggerFactory.getLogger(DefineCommand.class));
+    }
 
     @Override
-    public void execute(ExecutionContext executionContext, String[] args) throws CommandException {
+    protected void validateArgs(String[] args) throws CommandException {
         if (args.length != 2) {
-            logger.warn("DEFINE command failed: two arguments required");
-            throw new CommandException("DEFINE command: two arguments required");
+            logger.warn("DEFINE command failed: exactly two arguments required");
+            throw new CommandException("DEFINE command: exactly two arguments required");
         }
+    }
+
+    @Override
+    protected void executeCommand(ExecutionContext context, String[] args) throws CommandException {
         String name = args[0];
+        double value = parseDouble(args[1], "DEFINE command: invalid number format for value: " + args[1]);
+        context.setParameter(name, value);
+        logger.info("DEFINE command executed: defined {} = {}", name, value);
+    }
+
+    @Override
+    protected String getCommandName() {
+        return "DEFINE";
+    }
+
+    private double parseDouble(String value, String errorMessage) throws CommandException {
         try {
-            Double.parseDouble(name);
-            logger.error("DEFINE command failed: parameter should be a string");
-            throw new CommandException("DEFINE command: parameter should be a string");
-        } catch (NumberFormatException _) {
-        }
-        try {
-            double value = Double.parseDouble(args[1]);
-            executionContext.getParameters().put(args[0], value);
-            logger.info("DEFINE command executed: {} = {}", name, value);
+            return Double.parseDouble(value);
         } catch (NumberFormatException e) {
-            logger.error("DEFINE command failed: Invalid format for parameter: {}", args[0]);
-            throw new CommandException("Invalid format for parameter: " + args[0]);
+            logger.error(errorMessage);
+            throw new CommandException(errorMessage);
         }
     }
 }

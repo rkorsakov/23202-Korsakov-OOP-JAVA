@@ -1,28 +1,29 @@
 package commands;
 
-import main.Command;
 import main.CommandException;
-import main.ExecutionContext;
-import org.slf4j.Logger;
+import main.UnaryCommand;
 import org.slf4j.LoggerFactory;
 
-public class SqrtCommand implements Command {
-    private static final Logger logger = LoggerFactory.getLogger(SqrtCommand.class);
+public class SqrtCommand extends UnaryCommand {
+    public SqrtCommand() {
+        super(LoggerFactory.getLogger(SqrtCommand.class));
+    }
 
     @Override
-    public void execute(ExecutionContext executionContext, String[] args) throws CommandException {
-        if (executionContext.getStack().isEmpty()) {
-            logger.error("SQRT command failed: stack is empty");
-            throw new CommandException("SQRT command: stack is empty");
-        }
-        double a = executionContext.getStack().pop();
-        if (a < 0) {
-            logger.error("SQRT command failed: negative number {}", a);
+    protected double performOperation(double value) throws CommandException {
+        if (value < 0) {
             throw new CommandException("SQRT command: negative number");
         }
-        double result = Math.sqrt(a);
-        executionContext.getStack().push(result);
+        return Math.sqrt(value);
+    }
 
-        logger.info("Executed SQRT command: sqrt({}) = {}", a, result);
+    @Override
+    protected String getCommandName() {
+        return "SQRT";
+    }
+
+    @Override
+    protected void logExecution(double value, double result) {
+        logger.info("Executed SQRT command: sqrt({}) = {}", value, result);
     }
 }

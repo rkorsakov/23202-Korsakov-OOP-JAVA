@@ -11,6 +11,7 @@ public abstract class UnaryCommand implements Command {
 
     @Override
     public void execute(ExecutionContext context, String[] args) throws CommandException {
+        validateArgs(args);
         if (context.isStackEmpty()) {
             throw new CommandException(getCommandName() + " failed: stack is empty");
         }
@@ -20,9 +21,13 @@ public abstract class UnaryCommand implements Command {
         logExecution(value, result);
     }
 
+    protected void validateArgs(String[] args) throws CommandException {
+        if (args.length > 0) {
+            throw new CommandException(getCommandName() + " command: no arguments expected");
+        }
+    }
+
     protected abstract double performOperation(double value) throws CommandException;
-
     protected abstract String getCommandName();
-
     protected abstract void logExecution(double value, double result);
 }
