@@ -3,17 +3,15 @@ import main.CommandException;
 import main.ExecutionContext;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
+import static org.mockito.Mockito.when;
 
 public class AddCommandTest {
-    private static final double DELTA = 1e-15;
-    private AddCommand addCommand;
-    @Mock
     private ExecutionContext context;
+    private AddCommand addCommand;
 
     @Before
     public void setUp() {
@@ -23,21 +21,14 @@ public class AddCommandTest {
 
     @Test
     public void testAddTwoNumbers() throws CommandException {
-        context.pushStack(2.0);
-        context.pushStack(3.0);
+        when(context.getStackSize()).thenReturn(2);
+        when(context.popStack()).thenReturn(3.0).thenReturn(2.0);
         addCommand.execute(context, new String[]{});
-        assertEquals(5.0, context.peekStack(), DELTA);
+        Mockito.verify(context).pushStack(5.0);
     }
-
     @Test
-    public void testAddThrowsExceptionIfStackIsEmpty() {
-        CommandException exception = assertThrows(CommandException.class, () -> addCommand.execute(context, new String[]{}));
-        assertEquals("ADD command: not enough values in stack", exception.getMessage());
-    }
-
-    @Test
-    public void testAddThrowsExceptionIfOnlyOneNumber() {
-        context.pushStack(2.0);
+    public void testAddThrowsExceptionNotEnoughVals() {
+        when(context.getStackSize()).thenReturn(1);
         CommandException exception = assertThrows(CommandException.class, () -> addCommand.execute(context, new String[]{}));
         assertEquals("ADD command: not enough values in stack", exception.getMessage());
     }
