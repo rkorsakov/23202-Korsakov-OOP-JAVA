@@ -1,26 +1,25 @@
 package commands;
 
-import main.UnaryCommand;
+import main.CommandException;
+import main.ContextCommand;
+import main.ExecutionContext;
 import org.slf4j.LoggerFactory;
 
-public class PrintCommand extends UnaryCommand {
+public class PrintCommand extends ContextCommand {
     public PrintCommand() {
-        super(LoggerFactory.getLogger(PrintCommand.class));
+        super(LoggerFactory.getLogger(PrintCommand.class), 0);
     }
 
     @Override
-    protected double performOperation(double value) {
+    protected void executeCommand(ExecutionContext context, String[] args) throws CommandException {
+        checkStackNotEmpty(context);
+        double value = context.peekStack();
         System.out.println(value);
-        return value;
+        logger.info("PRINT command executed: value = {}", value);
     }
 
     @Override
     protected String getCommandName() {
         return "PRINT";
-    }
-
-    @Override
-    protected void logExecution(double value, double result) {
-        logger.info("Executed PRINT command: {}", value);
     }
 }

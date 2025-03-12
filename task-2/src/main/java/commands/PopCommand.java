@@ -7,22 +7,14 @@ import org.slf4j.LoggerFactory;
 
 public class PopCommand extends ContextCommand {
     public PopCommand() {
-        super(LoggerFactory.getLogger(PopCommand.class));
-    }
-
-    @Override
-    protected void validateArgs(String[] args) throws CommandException {
-        if (args.length > 0) {
-            logger.warn("POP command failed: no arguments expected");
-            throw new CommandException("POP command: no arguments expected");
-        }
+        super(LoggerFactory.getLogger(PopCommand.class), 0);
     }
 
     @Override
     protected void executeCommand(ExecutionContext context, String[] args) throws CommandException {
         checkStackNotEmpty(context);
-        context.popStack();
-        logger.info("POP command executed: top value removed from stack");
+        double value = context.popStack();
+        logger.info("POP command executed: removed value {}", value);
     }
 
     @Override

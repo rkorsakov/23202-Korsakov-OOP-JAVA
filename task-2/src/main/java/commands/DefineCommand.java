@@ -7,26 +7,18 @@ import org.slf4j.LoggerFactory;
 
 public class DefineCommand extends ContextCommand {
     public DefineCommand() {
-        super(LoggerFactory.getLogger(DefineCommand.class));
-    }
-
-    @Override
-    protected void validateArgs(String[] args) throws CommandException {
-        if (args.length != 2) {
-            logger.warn("DEFINE command failed: two arguments required");
-            throw new CommandException("DEFINE command: two arguments required");
-        }
-        try {
-            Double.parseDouble(args[0]);
-            logger.error("DEFINE command failed: parameter should be a string");
-            throw new CommandException("DEFINE command: parameter should be a string");
-        } catch (NumberFormatException _) {
-        }
+        super(LoggerFactory.getLogger(DefineCommand.class), 2);
     }
 
     @Override
     protected void executeCommand(ExecutionContext context, String[] args) throws CommandException {
         String name = args[0];
+        try {
+            Double.parseDouble(name);
+            logger.error("DEFINE command failed: parameter should be a string");
+            throw new CommandException("DEFINE command: parameter should be a string");
+        } catch (NumberFormatException _) {
+        }
         double value = parseDouble(args[1], "Invalid format for parameter: " + args[0]);
         context.setParameter(name, value);
         logger.info("DEFINE command executed: defined {} = {}", name, value);

@@ -36,12 +36,12 @@ public class PushCommandTest {
     @Test
     public void testPushThrowsExceptionForNoArguments() {
         CommandException exception = assertThrows(CommandException.class, () -> pushCommand.execute(context, new String[]{}));
-        assertEquals("PUSH command: one argument required", exception.getMessage());
+        assertEquals("PUSH command: expected 1 arguments, but got 0", exception.getMessage());
     }
 
     @Test
     public void testPushThrowsExceptionForTooManyArguments() {
         CommandException exception = assertThrows(CommandException.class, () -> pushCommand.execute(context, new String[]{"3.14", "2.71"}));
-        assertEquals("PUSH command: one argument required", exception.getMessage());
+        assertEquals("PUSH command: expected 1 arguments, but got 2", exception.getMessage());
     }
 }

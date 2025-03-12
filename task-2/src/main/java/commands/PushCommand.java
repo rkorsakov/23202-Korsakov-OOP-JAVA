@@ -7,15 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class PushCommand extends ContextCommand {
     public PushCommand() {
-        super(LoggerFactory.getLogger(PushCommand.class));
-    }
-
-    @Override
-    protected void validateArgs(String[] args) throws CommandException {
-        if (args.length != 1) {
-            logger.warn("PUSH command failed: one argument required");
-            throw new CommandException("PUSH command: one argument required");
-        }
+        super(LoggerFactory.getLogger(PushCommand.class), 1);
     }
 
     @Override

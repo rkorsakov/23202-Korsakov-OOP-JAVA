@@ -36,7 +36,7 @@ public class DefineCommandTest {
     public void testDefineWithTooManyArgumentsThrowsException() {
         CommandException exception = assertThrows(CommandException.class,
                 () -> defineCommand.execute(context, new String[]{"a", "15", "10"}));
-        assertEquals("DEFINE command: two arguments required", exception.getMessage());
+        assertEquals("DEFINE command: expected 2 arguments, but got 3", exception.getMessage());
     }
 
     @Test
