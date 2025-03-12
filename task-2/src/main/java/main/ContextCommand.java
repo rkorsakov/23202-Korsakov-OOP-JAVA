@@ -31,6 +31,7 @@ public abstract class ContextCommand implements Command {
             );
         }
     }
+
     protected abstract void executeCommand(ExecutionContext context, String[] args) throws CommandException;
 
     protected abstract String getCommandName();

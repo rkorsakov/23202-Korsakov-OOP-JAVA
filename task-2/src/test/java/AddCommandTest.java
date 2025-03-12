@@ -26,6 +26,7 @@ public class AddCommandTest {
         addCommand.execute(context, new String[]{});
         Mockito.verify(context).pushStack(5.0);
     }
+
     @Test
     public void testAddThrowsExceptionNotEnoughVals() {
         when(context.getStackSize()).thenReturn(1);

@@ -28,6 +28,8 @@ public abstract class UnaryCommand implements Command {
     }
 
     protected abstract double performOperation(double value) throws CommandException;
+
     protected abstract String getCommandName();
+
     protected abstract void logExecution(double value, double result);
 }
