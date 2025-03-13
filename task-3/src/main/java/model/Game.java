@@ -56,8 +56,17 @@ public class Game {
         return players[currentPlayerIndex];
     }
 
-    public void playCard(Card card) {
+    public ArrayList<Card> getTable() {
+        return new ArrayList<>(table);
+    }
 
+    public void playHand(ArrayList<Card> selectedCards) {
+        ArrayList<Card> playedCards = getCurrentPlayer().playHand(selectedCards);
+        table.addAll(playedCards);
+    }
+
+    public void nextTurn() {
+        currentPlayerIndex = (currentPlayerIndex + 1) % playersCount;
     }
 
     private int determineFirstPlayer() {

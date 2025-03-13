@@ -1,8 +1,14 @@
 import controller.GameController;
-import model.Game;
+import view.GameView;
+
+import javax.swing.*;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        Game game = new Game(2);
+        GameController controller = new GameController(2, null);
+        GameView view = new GameView(controller::playHand);
+        controller.setView(view);
+        SwingUtilities.invokeLater(controller::startGame);
     }
 }
