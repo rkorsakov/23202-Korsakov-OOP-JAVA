@@ -31,12 +31,7 @@ public class GameController {
     public void updateView() {
         if (view != null) {
             view.updateHand(game.getCurrentPlayer().getHand());
-            view.updateTable(game.getTable());
         }
-    }
-
-    public Game getGame() {
-        return game;
     }
 
     public void setView(GameView view) {

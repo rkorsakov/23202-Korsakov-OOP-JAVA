@@ -89,19 +89,6 @@ public class GameView {
         handPanel.repaint();
     }
 
-    public void updateTable(ArrayList<Card> table) {
-        if (tablePanel == null) {
-            throw new IllegalStateException("tablePanel is not initialized yet!");
-        }
-        tablePanel.removeAll();
-        for (Card card : table) {
-            JLabel cardLabel = new JLabel(card.toString());
-            tablePanel.add(cardLabel);
-        }
-        tablePanel.revalidate();
-        tablePanel.repaint();
-    }
-
     public void printError(String message) {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
