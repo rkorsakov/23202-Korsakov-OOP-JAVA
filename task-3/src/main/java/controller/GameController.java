@@ -22,8 +22,6 @@ public class GameController {
 
     public void playHand(ArrayList<Card> selectedCards) {
         try {
-            game.validateAttack(selectedCards);
-            game.nextTurn();
             updateView();
         } catch (Exception e) {
             view.printError(e.getMessage());

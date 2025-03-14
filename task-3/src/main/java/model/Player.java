@@ -19,17 +19,6 @@ public class Player {
         return new ArrayList<>(hand);
     }
 
-    public ArrayList<Card> playHand(ArrayList<Card> selectedCards) {
-        ArrayList<Card> playedCards = new ArrayList<>();
-        for (Card card : selectedCards) {
-            if (hand.contains(card)) {
-                hand.remove(card);
-                playedCards.add(card);
-            }
-        }
-        return playedCards;
-    }
-
     public void setAttacking() {
         isAttacking = true;
     }
