@@ -101,4 +101,8 @@ public class GameView {
         tablePanel.revalidate();
         tablePanel.repaint();
     }
+
+    public void printError(String message) {
+        JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }

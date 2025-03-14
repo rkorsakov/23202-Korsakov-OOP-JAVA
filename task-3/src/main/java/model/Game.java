@@ -50,6 +50,7 @@ public class Game {
             card.setTrump(card.getSuit().equals(trumpSuit));
         }
         currentPlayerIndex = determineFirstPlayer();
+        players[currentPlayerIndex].setAttacking();
     }
 
     public Player getCurrentPlayer() {
@@ -60,9 +61,36 @@ public class Game {
         return new ArrayList<>(table);
     }
 
-    public void playHand(ArrayList<Card> selectedCards) {
+    public void validateAttack(ArrayList<Card> selectedCards) {
+        if (selectedCards.isEmpty()) {
+            throw new IllegalArgumentException("Cannot play an empty hand!");
+        }
+        if (table.isEmpty()) {
+            String rank = selectedCards.getFirst().getRank();
+            for (Card card : selectedCards) {
+                if (!card.getRank().equals(rank)) {
+                    throw new IllegalArgumentException("All cards must be of the same rank when the table is empty!");
+                }
+            }
+        } else {
+            ArrayList<String> tableRanks = new ArrayList<>();
+            for (Card card : table) {
+                if (!tableRanks.contains(card.getRank())) {
+                    tableRanks.add(card.getRank());
+                }
+            }
+            for (Card card : selectedCards) {
+                if (!tableRanks.contains(card.getRank())) {
+                    throw new IllegalArgumentException("You can only play cards of the same rank as cards already on the table!");
+                }
+            }
+        }
         ArrayList<Card> playedCards = getCurrentPlayer().playHand(selectedCards);
         table.addAll(playedCards);
+    }
+
+    public void validateDefense(ArrayList<Card> selectedCards) {
+
     }
 
     public void nextTurn() {

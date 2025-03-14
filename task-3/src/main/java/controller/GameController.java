@@ -21,9 +21,13 @@ public class GameController {
     }
 
     public void playHand(ArrayList<Card> selectedCards) {
-        game.playHand(selectedCards);
-        game.nextTurn();
-        updateView();
+        try {
+            game.validateAttack(selectedCards);
+            game.nextTurn();
+            updateView();
+        } catch (Exception e) {
+            view.printError(e.getMessage());
+        }
     }
 
     public void updateView() {
