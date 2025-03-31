@@ -1,7 +1,7 @@
 package factory.product;
 
 public abstract class Product {
-    private final int id;
+    protected final int id;
 
     public Product(int id) {
         this.id = id;
