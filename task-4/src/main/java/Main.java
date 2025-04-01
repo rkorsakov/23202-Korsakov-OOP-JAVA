@@ -7,7 +7,7 @@ import factory.storage.Storage;
 
 public class Main {
     public static void main(String[] args) {
-        Factory factory = new Factory();
+        Factory factory = new Factory(6, 6, 6);
         Engine engine = new Engine();
         Accessory accessory = new Accessory();
         Body body = new Body();
