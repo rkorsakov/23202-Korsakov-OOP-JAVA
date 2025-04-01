@@ -1,13 +1,12 @@
 package factory.product;
 
+import java.util.UUID;
+
 public abstract class Product {
-    protected final int id;
+    private final UUID id = UUID.randomUUID();
 
-    public Product(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
+    @Override
+    public String toString() {
+        return String.format("%s <%s>", getClass().getSimpleName(), id);
     }
 }

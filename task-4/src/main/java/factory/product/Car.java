@@ -5,8 +5,7 @@ public class Car extends Product {
     private final Engine engine;
     private final Accessory accessory;
 
-    public Car(int id, Body body, Engine engine, Accessory accessory) {
-        super(id);
+    public Car(Body body, Engine engine, Accessory accessory) {
         this.body = body;
         this.engine = engine;
         this.accessory = accessory;
@@ -26,7 +25,7 @@ public class Car extends Product {
 
     @Override
     public String toString() {
-        return String.format("Car<%d>(%s, %s, %s)",
-                id, body, engine, accessory);
+        return String.format("%s(%s, %s, %s)",
+                super.toString(), body, engine, accessory);
     }
 }
