@@ -1,23 +1,17 @@
 import factory.Factory;
-import factory.product.Accessory;
-import factory.product.Body;
-import factory.product.Car;
-import factory.product.Engine;
-import factory.storage.Storage;
+import factory.config.FactoryConfig;
 
 public class Main {
     public static void main(String[] args) {
-        Factory factory = new Factory(6, 6, 6);
-        Engine engine = new Engine();
-        Accessory accessory = new Accessory();
-        Body body = new Body();
-        Car car = new Car(body, engine, accessory);
-        System.out.println(car);
-        Storage<Body> bodyStorage = new Storage<>(5);
         try {
-            bodyStorage.put(body);
-        }
-        catch (Exception e) {
+            FactoryConfig config = new FactoryConfig("factory_config.properties");
+            Factory factory = new Factory(config);
+            factory.start();
+            Thread.sleep(10_000);
+            factory.stop();
+            System.out.println("Фабрика остановлена");
+        } catch (Exception e) {
+            System.err.println("Ошибка: " + e.getMessage());
             e.printStackTrace();
         }
     }

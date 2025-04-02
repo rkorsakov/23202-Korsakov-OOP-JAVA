@@ -1,7 +1,7 @@
 package factory.config;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class FactoryConfig {
@@ -9,8 +9,11 @@ public class FactoryConfig {
 
     public FactoryConfig(String configPath) throws IOException {
         properties = new Properties();
-        try (FileInputStream fis = new FileInputStream(configPath)) {
-            properties.load(fis);
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(configPath)) {
+            if (input == null) {
+                throw new IOException("Config file not found: " + configPath);
+            }
+            properties.load(input);
         }
     }
 
