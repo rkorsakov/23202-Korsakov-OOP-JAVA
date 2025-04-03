@@ -7,9 +7,8 @@ public class Main {
             FactoryConfig config = new FactoryConfig("factory_config.properties");
             Factory factory = new Factory(config);
             factory.start();
-            Thread.sleep(10_000);
+            Thread.sleep(2_000);
             factory.stop();
-            System.out.println("Фабрика остановлена");
         } catch (Exception e) {
             System.err.println("Ошибка: " + e.getMessage());
             e.printStackTrace();

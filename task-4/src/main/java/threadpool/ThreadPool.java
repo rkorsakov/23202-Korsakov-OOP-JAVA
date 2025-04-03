@@ -24,6 +24,9 @@ public class ThreadPool {
 
     public synchronized void shutdown() {
         isRunning = false;
+        for (Thread worker : workers) {
+            worker.interrupt();
+        }
         notifyAll();
     }
 
