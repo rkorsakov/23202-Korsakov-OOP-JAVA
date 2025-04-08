@@ -40,12 +40,11 @@ public class CarStorageController extends Thread {
                     }
                     if (hasEnoughDetails() && !isInterrupted()) {
                         threadPool.addTask(assemblyTask);
-                        logger.debug("Added new assembly task to thread pool");
                     }
                 }
             }
         } catch (InterruptedException e) {
-            logger.info("Storage controller interrupted");
+            System.err.println("Storage controller interrupted");
             Thread.currentThread().interrupt();
         }
     }

@@ -33,12 +33,11 @@ public class AssemblingTask implements Task {
             Body body = bodyStorage.take();
             Engine engine = engineStorage.take();
             Accessory accessory = accessoryStorage.take();
-
             Car car = new Car(body, engine, accessory);
             carStorage.put(car);
 
         } catch (InterruptedException e) {
-            logger.warn("Assembly task interrupted");
+            System.err.println("Assembly task interrupted");
             Thread.currentThread().interrupt();
         }
     }

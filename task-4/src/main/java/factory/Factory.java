@@ -27,6 +27,7 @@ public class Factory {
     private final ThreadPool threadPool;
     private final CarStorageController controller;
     private final List<Dealer> dealers;
+    private final boolean logSale;
 
     public Factory(FactoryConfig config) {
         this.bodyStorage = new Storage<>(config.getStorageBodySize());
@@ -41,23 +42,13 @@ public class Factory {
         }
         this.threadPool = new ThreadPool(config.getWorkersCount());
         this.controller = new CarStorageController(
-                carStorage,
-                threadPool,
-                bodyStorage,
-                engineStorage,
-                accessoryStorage,
-                config.getStorageAutoSize()
+                carStorage, threadPool, bodyStorage, engineStorage, accessoryStorage, config.getStorageAutoSize()
         );
-
         this.dealers = new ArrayList<>();
+        this.logSale = config.isLogSale();
 
         for (int i = 0; i < config.getDealersCount(); i++) {
-            dealers.add(new Dealer(
-                    carStorage,
-                    controller,
-                    i + 1,
-                    3000
-            ));
+            dealers.add(new Dealer(carStorage, controller, i + 1, 3000, logSale));
         }
     }
 
@@ -67,7 +58,7 @@ public class Factory {
         accessorySuppliers.forEach(Thread::start);
         controller.start();
         dealers.forEach(Thread::start);
-        System.out.println("Фабрика запущена");
+        System.out.println("Factory started");
     }
 
     public void stop() {
@@ -77,6 +68,42 @@ public class Factory {
         bodySupplier.stopSupplier();
         engineSupplier.stopSupplier();
         accessorySuppliers.forEach(Supplier::stopSupplier);
-        System.out.println("Фабрика остановлена");
+        System.out.println("Factory stopped");
+    }
+    
+    public Storage<Body> getBodyStorage() {
+        return bodyStorage;
+    }
+
+    public Storage<Engine> getEngineStorage() {
+        return engineStorage;
+    }
+
+    public Storage<Accessory> getAccessoryStorage() {
+        return accessoryStorage;
+    }
+
+    public Storage<Car> getCarStorage() {
+        return carStorage;
+    }
+
+    public ThreadPool getThreadPool() {
+        return threadPool;
+    }
+
+    public Supplier<Body> getBodySupplier() {
+        return bodySupplier;
+    }
+
+    public Supplier<Engine> getEngineSupplier() {
+        return engineSupplier;
+    }
+
+    public List<Supplier<Accessory>> getAccessorySuppliers() {
+        return accessorySuppliers;
+    }
+
+    public List<Dealer> getDealers() {
+        return dealers;
     }
 }
