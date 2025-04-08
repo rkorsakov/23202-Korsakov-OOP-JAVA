@@ -7,11 +7,11 @@ import java.util.Properties;
 public class FactoryConfig {
     private final Properties properties;
 
-    public FactoryConfig(String configPath) throws IOException {
+    public FactoryConfig(String configName) throws IOException {
         properties = new Properties();
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream(configPath)) {
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(configName)) {
             if (input == null) {
-                throw new IOException("Config file not found: " + configPath);
+                throw new IOException("Config file not found: " + configName);
             }
             properties.load(input);
         }

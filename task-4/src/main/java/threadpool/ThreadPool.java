@@ -1,5 +1,7 @@
 package threadpool;
 
+import factory.worker.Worker;
+
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -39,6 +41,7 @@ public class ThreadPool {
         public void run() {
             while (isRunning || !taskQueue.isEmpty()) {
                 Task task;
+                Worker worker = new Worker();
                 synchronized (ThreadPool.this) {
                     while (taskQueue.isEmpty() && isRunning) {
                         try {
@@ -50,8 +53,9 @@ public class ThreadPool {
                     }
                     if (taskQueue.isEmpty()) return;
                     task = taskQueue.poll();
+                    worker.setTask(task);
                 }
-                task.execute();
+                worker.performTask();
             }
         }
     }

@@ -5,15 +5,17 @@ import factory.product.Body;
 import factory.product.Car;
 import factory.product.Engine;
 import factory.storage.Storage;
-import factory.worker.Worker;
+import factory.worker.AssemblingTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import threadpool.ThreadPool;
 
 public class CarStorageController extends Thread {
+    private static final Logger logger = LoggerFactory.getLogger(CarStorageController.class);
+
     private final Storage<Car> carStorage;
     private final ThreadPool threadPool;
-    private final Storage<Body> bodyStorage;
-    private final Storage<Engine> engineStorage;
-    private final Storage<Accessory> accessoryStorage;
+    private final AssemblingTask assemblyTask;
     private final int targetStockLevel;
 
     public CarStorageController(Storage<Car> carStorage,
@@ -24,9 +26,7 @@ public class CarStorageController extends Thread {
                                 int targetStockLevel) {
         this.carStorage = carStorage;
         this.threadPool = threadPool;
-        this.bodyStorage = bodyStorage;
-        this.engineStorage = engineStorage;
-        this.accessoryStorage = accessoryStorage;
+        this.assemblyTask = new AssemblingTask(bodyStorage, engineStorage, accessoryStorage, carStorage);
         this.targetStockLevel = targetStockLevel;
     }
 
@@ -39,21 +39,21 @@ public class CarStorageController extends Thread {
                         carStorage.wait();
                     }
                     if (hasEnoughDetails() && !isInterrupted()) {
-                        threadPool.addTask(
-                                new Worker(bodyStorage, engineStorage, accessoryStorage, carStorage)
-                        );
-                    } else if (isInterrupted()) break;
+                        threadPool.addTask(assemblyTask);
+                        logger.debug("Added new assembly task to thread pool");
+                    }
                 }
             }
         } catch (InterruptedException e) {
+            logger.info("Storage controller interrupted");
             Thread.currentThread().interrupt();
         }
     }
 
     private boolean hasEnoughDetails() {
-        return bodyStorage.getSize() > 0
-                && engineStorage.getSize() > 0
-                && accessoryStorage.getSize() > 0;
+        return assemblyTask.getBodyStorage().getSize() > 0
+                && assemblyTask.getEngineStorage().getSize() > 0
+                && assemblyTask.getAccessoryStorage().getSize() > 0;
     }
 
     public void notifyController() {

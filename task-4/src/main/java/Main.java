@@ -10,7 +10,7 @@ public class Main {
             Thread.sleep(2_000);
             factory.stop();
         } catch (Exception e) {
-            System.err.println("Ошибка: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
     }
