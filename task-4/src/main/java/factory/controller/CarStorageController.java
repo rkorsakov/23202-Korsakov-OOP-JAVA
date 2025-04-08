@@ -60,4 +60,8 @@ public class CarStorageController extends Thread {
             carStorage.notify();
         }
     }
+
+    public AssemblingTask getAssemblyTask() {
+        return assemblyTask;
+    }
 }

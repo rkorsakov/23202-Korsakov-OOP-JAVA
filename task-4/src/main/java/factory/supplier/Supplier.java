@@ -8,6 +8,7 @@ public class Supplier<T extends Product> extends Thread {
     private final Class<T> productClass;
     private volatile boolean isRunning = true;
     private int productionTimeMs;
+    private int producedCount = 0;
 
     public Supplier(Storage<T> storage, Class<T> productClass, int productionTimeMs) {
         if (storage == null || productClass == null || productionTimeMs <= 0) {
@@ -25,6 +26,7 @@ public class Supplier<T extends Product> extends Thread {
                 Thread.sleep(productionTimeMs);
                 T product = productClass.getDeclaredConstructor().newInstance();
                 storage.put(product);
+                producedCount++;
                 System.out.printf("[%s] Produced: %s\n", getName(), product);
             }
         } catch (InterruptedException e) {
@@ -44,5 +46,9 @@ public class Supplier<T extends Product> extends Thread {
             throw new IllegalArgumentException("Time must be positive");
         }
         this.productionTimeMs = productionTimeMs;
+    }
+
+    public int getProducedCount() {
+        return producedCount;
     }
 }

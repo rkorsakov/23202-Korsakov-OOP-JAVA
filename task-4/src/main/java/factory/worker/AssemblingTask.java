@@ -16,6 +16,7 @@ public class AssemblingTask implements Task {
     private final Storage<Engine> engineStorage;
     private final Storage<Accessory> accessoryStorage;
     private final Storage<Car> carStorage;
+    private int carsProduced = 0; // Счетчик произведенных машин
 
     public AssemblingTask(Storage<Body> bodyStorage,
                           Storage<Engine> engineStorage,
@@ -30,14 +31,15 @@ public class AssemblingTask implements Task {
     @Override
     public void execute() {
         try {
+            logger.debug("Starting assembly task...");
             Body body = bodyStorage.take();
             Engine engine = engineStorage.take();
             Accessory accessory = accessoryStorage.take();
+
             Car car = new Car(body, engine, accessory);
             carStorage.put(car);
-
+            carsProduced++;
         } catch (InterruptedException e) {
-            System.err.println("Assembly task interrupted");
             Thread.currentThread().interrupt();
         }
     }
@@ -52,5 +54,9 @@ public class AssemblingTask implements Task {
 
     public Storage<Accessory> getAccessoryStorage() {
         return accessoryStorage;
+    }
+
+    public int getCarsProduced() {
+        return carsProduced;
     }
 }

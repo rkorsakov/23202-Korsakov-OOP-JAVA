@@ -32,6 +32,10 @@ public class ThreadPool {
         notifyAll();
     }
 
+    public synchronized int getTaskQueueSize() {
+        return taskQueue.size();
+    }
+
     private class WorkerThread extends Thread {
         public WorkerThread(String name) {
             super(name);

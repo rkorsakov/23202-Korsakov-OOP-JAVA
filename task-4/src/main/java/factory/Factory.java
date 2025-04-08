@@ -48,7 +48,7 @@ public class Factory {
         this.logSale = config.isLogSale();
 
         for (int i = 0; i < config.getDealersCount(); i++) {
-            dealers.add(new Dealer(carStorage, controller, i + 1, 3000, logSale));
+            dealers.add(new Dealer(carStorage, controller, i + 1, 1000, logSale));
         }
     }
 
@@ -70,7 +70,11 @@ public class Factory {
         accessorySuppliers.forEach(Supplier::stopSupplier);
         System.out.println("Factory stopped");
     }
-    
+
+    public int getCarsProduced() {
+        return controller.getAssemblyTask().getCarsProduced();
+    }
+
     public Storage<Body> getBodyStorage() {
         return bodyStorage;
     }

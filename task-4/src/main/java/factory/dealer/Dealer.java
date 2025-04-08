@@ -35,7 +35,6 @@ public class Dealer extends Thread {
                 controller.notifyController();
             }
         } catch (InterruptedException e) {
-            logger.info("Dealer {} interrupted", number);
             Thread.currentThread().interrupt();
         }
     }
