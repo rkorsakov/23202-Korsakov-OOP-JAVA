@@ -9,7 +9,6 @@ import java.awt.*;
 public class FactoryGUI extends JFrame {
     private final Factory factory;
 
-    // Компоненты интерфейса
     private JLabel bodyStockLabel, engineStockLabel, accessoryStockLabel, carStockLabel;
     private JLabel bodyProducedLabel, engineProducedLabel, accessoryProducedLabel, carsProducedLabel;
     private JLabel tasksPendingLabel;
