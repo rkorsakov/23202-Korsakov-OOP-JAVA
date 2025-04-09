@@ -48,6 +48,10 @@ public class Dealer extends Thread {
         this.delayMs = newDelayMs;
     }
 
+    public int getDelay() {
+        return this.delayMs;
+    }
+
     public void stopDealer() {
         isRunning = false;
         interrupt();

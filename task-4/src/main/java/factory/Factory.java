@@ -35,10 +35,10 @@ public class Factory {
         this.accessoryStorage = new Storage<>(config.getStorageAccessorySize());
         this.carStorage = new Storage<>(config.getStorageAutoSize());
         this.bodySupplier = new Supplier<>(bodyStorage, Body.class, 1500);
-        this.engineSupplier = new Supplier<>(engineStorage, Engine.class, 2000);
+        this.engineSupplier = new Supplier<>(engineStorage, Engine.class, 1500);
         this.accessorySuppliers = new ArrayList<>();
         for (int i = 0; i < config.getAccessorySuppliersCount(); i++) {
-            accessorySuppliers.add(new Supplier<>(accessoryStorage, Accessory.class, 500));
+            accessorySuppliers.add(new Supplier<>(accessoryStorage, Accessory.class, 1500));
         }
         this.threadPool = new ThreadPool(config.getWorkersCount());
         this.controller = new CarStorageController(

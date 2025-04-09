@@ -48,6 +48,10 @@ public class Supplier<T extends Product> extends Thread {
         this.productionTimeMs = productionTimeMs;
     }
 
+    public int getProductionDelay() {
+        return productionTimeMs;
+    }
+
     public int getProducedCount() {
         return producedCount;
     }
