@@ -16,7 +16,7 @@ public class AssemblingTask implements Task {
     private final Storage<Engine> engineStorage;
     private final Storage<Accessory> accessoryStorage;
     private final Storage<Car> carStorage;
-    private int carsProduced = 0; // Счетчик произведенных машин
+    private int carsProduced = 0;
 
     public AssemblingTask(Storage<Body> bodyStorage,
                           Storage<Engine> engineStorage,

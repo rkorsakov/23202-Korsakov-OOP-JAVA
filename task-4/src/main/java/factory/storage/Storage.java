@@ -41,8 +41,4 @@ public class Storage<T extends Product> {
             return products.size();
         }
     }
-
-    public int getCapacity() {
-        return capacity;
-    }
 }
