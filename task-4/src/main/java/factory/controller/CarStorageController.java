@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import threadpool.ThreadPool;
 
 public class CarStorageController extends Thread {
-    private static final Logger logger = LoggerFactory.getLogger(CarStorageController.class);
-
     private final Storage<Car> carStorage;
     private final ThreadPool threadPool;
     private final AssemblingTask assemblyTask;
