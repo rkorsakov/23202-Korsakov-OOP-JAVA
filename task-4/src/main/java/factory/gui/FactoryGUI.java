@@ -81,7 +81,7 @@ public class FactoryGUI extends JFrame {
         add(engineSpeedSlider);
 
         add(new JLabel("Accessory Supplier Delay (ms):"));
-        accessorySpeedSlider = new JSlider(500, 5000, factory.getAccessorySuppliers().getFirst().getProductionDelay());
+        accessorySpeedSlider = new JSlider(500, 5000, factory.getAccessorySuppliers().get(0).getProductionDelay());
         accessorySpeedSlider.setMajorTickSpacing(1000);
         accessorySpeedSlider.setMinorTickSpacing(250);
         accessorySpeedSlider.setPaintTicks(true);
@@ -93,7 +93,7 @@ public class FactoryGUI extends JFrame {
         add(accessorySpeedSlider);
 
         add(new JLabel("Dealer Delay (ms):"));
-        dealerSpeedSlider = new JSlider(500, 5000, factory.getDealers().getFirst().getDelay());
+        dealerSpeedSlider = new JSlider(500, 5000, factory.getDealers().get(0).getDelay());
         dealerSpeedSlider.setMajorTickSpacing(1000);
         dealerSpeedSlider.setMinorTickSpacing(250);
         dealerSpeedSlider.setPaintTicks(true);
