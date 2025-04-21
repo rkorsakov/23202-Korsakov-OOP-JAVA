@@ -5,6 +5,8 @@ import factory.product.Body;
 import factory.product.Car;
 import factory.product.Engine;
 import factory.storage.Storage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import threadpool.Task;
 
 public class AssemblingTask implements Task {

@@ -32,7 +32,6 @@ public class Dealer extends Thread {
                 if (logSale) {
                     logSale(car);
                 }
-                controller.notifyController();
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
