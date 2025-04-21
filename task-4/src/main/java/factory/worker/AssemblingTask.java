@@ -5,13 +5,9 @@ import factory.product.Body;
 import factory.product.Car;
 import factory.product.Engine;
 import factory.storage.Storage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import threadpool.Task;
 
 public class AssemblingTask implements Task {
-    private static final Logger logger = LoggerFactory.getLogger(AssemblingTask.class);
-
     private final Storage<Body> bodyStorage;
     private final Storage<Engine> engineStorage;
     private final Storage<Accessory> accessoryStorage;
@@ -31,7 +27,6 @@ public class AssemblingTask implements Task {
     @Override
     public void execute() {
         try {
-            logger.debug("Starting assembly task...");
             Body body = bodyStorage.take();
             Engine engine = engineStorage.take();
             Accessory accessory = accessoryStorage.take();
