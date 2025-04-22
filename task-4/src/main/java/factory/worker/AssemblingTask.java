@@ -5,8 +5,6 @@ import factory.product.Body;
 import factory.product.Car;
 import factory.product.Engine;
 import factory.storage.Storage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import threadpool.Task;
 
 public class AssemblingTask implements Task {
@@ -32,9 +30,17 @@ public class AssemblingTask implements Task {
             Body body = bodyStorage.take();
             Engine engine = engineStorage.take();
             Accessory accessory = accessoryStorage.take();
+            if (engine == null || body == null || accessory == null) {
+                engineStorage.put(engine);
+                bodyStorage.put(body);
+                accessoryStorage.put(accessory);
+                return;
+            }
 
             Car car = new Car(body, engine, accessory);
-            carStorage.put(car);
+            synchronized (carStorage) {
+                carStorage.put(car);
+            }
             carsProduced++;
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

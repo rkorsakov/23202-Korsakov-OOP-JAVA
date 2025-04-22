@@ -42,8 +42,9 @@ public class Factory {
         }
         this.threadPool = new ThreadPool(config.getWorkersCount());
         this.controller = new CarStorageController(
-                carStorage, threadPool, bodyStorage, engineStorage, accessoryStorage, config.getStorageAutoSize()
+                carStorage, threadPool, bodyStorage, engineStorage, accessoryStorage, 100
         );
+        carStorage.setController(controller);
         this.dealers = new ArrayList<>();
         this.logSale = config.isLogSale();
 

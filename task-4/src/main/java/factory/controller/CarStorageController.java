@@ -6,8 +6,6 @@ import factory.product.Car;
 import factory.product.Engine;
 import factory.storage.Storage;
 import factory.worker.AssemblingTask;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import threadpool.ThreadPool;
 
 public class CarStorageController extends Thread {
@@ -26,6 +24,9 @@ public class CarStorageController extends Thread {
         this.threadPool = threadPool;
         this.assemblyTask = new AssemblingTask(bodyStorage, engineStorage, accessoryStorage, carStorage);
         this.targetStockLevel = targetStockLevel;
+        for (int i = 0; i < targetStockLevel; i++) {
+            threadPool.addTask(assemblyTask);
+        }
     }
 
     @Override
@@ -33,10 +34,8 @@ public class CarStorageController extends Thread {
         try {
             while (!isInterrupted()) {
                 synchronized (carStorage) {
-                    while (carStorage.getSize() >= targetStockLevel && !isInterrupted()) {
-                        carStorage.wait();
-                    }
-                    if (hasEnoughDetails() && !isInterrupted()) {
+                    carStorage.wait();
+                    if (!isInterrupted() && carStorage.getSize() < targetStockLevel) {
                         threadPool.addTask(assemblyTask);
                     }
                 }
@@ -45,12 +44,6 @@ public class CarStorageController extends Thread {
             System.err.println("Storage controller interrupted");
             Thread.currentThread().interrupt();
         }
-    }
-
-    private boolean hasEnoughDetails() {
-        return assemblyTask.getBodyStorage().getSize() > 0
-                && assemblyTask.getEngineStorage().getSize() > 0
-                && assemblyTask.getAccessoryStorage().getSize() > 0;
     }
 
     public void notifyController() {

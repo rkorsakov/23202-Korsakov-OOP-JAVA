@@ -1,5 +1,6 @@
 package factory.storage;
 
+import factory.controller.CarStorageController;
 import factory.product.Product;
 
 import java.util.LinkedList;
@@ -9,10 +10,15 @@ public class Storage<T extends Product> {
     private final Queue<T> products;
     private final int capacity;
     private final Object lock = new Object();
+    private CarStorageController controller;
 
     public Storage(int capacity) {
         this.capacity = capacity;
         this.products = new LinkedList<>();
+    }
+
+    public void setController(CarStorageController controller) {
+        this.controller = controller;
     }
 
     public void put(T product) throws InterruptedException {
@@ -22,6 +28,9 @@ public class Storage<T extends Product> {
             }
             products.add(product);
             lock.notifyAll();
+            if (controller != null) {
+                controller.notifyController();
+            }
         }
     }
 
@@ -32,6 +41,9 @@ public class Storage<T extends Product> {
             }
             T product = products.poll();
             lock.notifyAll();
+            if (controller != null) {
+                controller.notifyController();
+            }
             return product;
         }
     }
