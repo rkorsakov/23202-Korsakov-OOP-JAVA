@@ -28,7 +28,6 @@ public class Dealer extends Thread {
         try {
             while (isRunning && !isInterrupted()) {
                 Thread.sleep(1500);
-                System.out.println(carStorage.getSize());
                 Car car = carStorage.take();
                 if (logSale) {
                     logSale(car);
