@@ -35,17 +35,18 @@ public class Storage<T extends Product> {
     }
 
     public T take() throws InterruptedException {
+        T product;
         synchronized (lock) {
             while (products.isEmpty()) {
                 lock.wait();
             }
-            T product = products.poll();
+            product = products.poll();
             lock.notifyAll();
-            if (controller != null) {
-                controller.notifyController();
-            }
-            return product;
         }
+        if (controller != null) {
+            controller.notifyController();
+        }
+        return product;
     }
 
     public int getSize() {
