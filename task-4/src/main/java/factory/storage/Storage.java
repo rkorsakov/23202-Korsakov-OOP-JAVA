@@ -28,9 +28,6 @@ public class Storage<T extends Product> {
             }
             products.add(product);
             lock.notifyAll();
-            if (controller != null) {
-                controller.notifyController();
-            }
         }
     }
 
