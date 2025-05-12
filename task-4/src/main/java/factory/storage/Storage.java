@@ -17,6 +17,10 @@ public class Storage<T extends Product> {
         this.products = new LinkedList<>();
     }
 
+    public Object getLock(){
+        return lock;
+    }
+
     public void setController(CarStorageController controller) {
         this.controller = controller;
     }

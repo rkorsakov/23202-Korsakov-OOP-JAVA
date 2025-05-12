@@ -13,6 +13,7 @@ public class CarStorageController extends Thread {
     private final ThreadPool threadPool;
     private final AssemblingTask assemblyTask;
     private final int targetStockLevel;
+    private final Object lock;
 
     public CarStorageController(Storage<Car> carStorage,
                                 ThreadPool threadPool,
@@ -27,14 +28,15 @@ public class CarStorageController extends Thread {
         for (int i = 0; i < targetStockLevel; i++) {
             threadPool.addTask(assemblyTask);
         }
+        lock = carStorage.getLock();
     }
 
     @Override
     public void run() {
         try {
             while (!isInterrupted()) {
-                synchronized (carStorage) {
-                    carStorage.wait();
+                synchronized (lock) {
+                    lock.wait();
                     if (!isInterrupted() && carStorage.getSize() < targetStockLevel) {
                         threadPool.addTask(assemblyTask);
                     }
@@ -46,9 +48,9 @@ public class CarStorageController extends Thread {
         }
     }
 
-    public void notifyController() {
-        synchronized (carStorage) {
-            carStorage.notify();
+    public void notifyController(){
+        synchronized (lock) {
+            lock.notify();
         }
     }
 
